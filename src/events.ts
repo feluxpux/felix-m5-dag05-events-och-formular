@@ -12,7 +12,6 @@ export function kopplaFilter(
     grupp: HTMLElement,
     vidVal: (filter: Filter) => void
 ): void {
-    // TODO
     grupp.addEventListener('click', (handelse) => {
         if (!(handelse.target instanceof Element)) {
             return
@@ -40,4 +39,16 @@ export function kopplaLaggTill(
     vidLaggTill: (id: number) => void
 ): void {
     // TODO
+    container.addEventListener('click', (handelse) => {
+        if (!(handelse.target instanceof Element)) {
+            return
+        }
+        const knapp = handelse.target.closest<HTMLButtonElement>(
+            'button.lagg-i-order'
+        )
+        if (!knapp || !container.contains(knapp)) {
+            return
+        }
+        vidLaggTill(Number(knapp.dataset.id))
+    })
 }
