@@ -29,7 +29,18 @@ heroKnapp.addEventListener('click', (handelse) => {
 //    uppdatera rubriken och markera den billigaste lunchen som dagens rätt (om det finns någon lunch).
 // 4. Anropa uppdateraMeny("alla") direkt, och koppla filterknapparna med kopplaFilter.
 // TODO
+function uppdateraMeny(filter: Filter): void {
+    const ratter = filtreraMeny(meny, filter)
+    visaMeny(lista, ratter)
+    uppdateraRubrik(rubrik, ratter.length)
+    const dagens = billigast(filtreraMeny(meny, 'lunch'))
+    if (dagens) {
+        markeraDagensRatt(lista, dagens.id)
+    }
+}
 
+uppdateraMeny('alla')
+kopplaFilter(filterGrupp, uppdateraMeny)
 // DEL 3 (fördjupning): beställningen ---------------------------------------
 // 5. let order: OrderRad[] = []; Koppla kopplaLaggTill(lista, ...) så att klick lägger till i order och visar den
 //    med visaOrder. Koppla knappen #rensa-order till rensaOrder.
